@@ -1,0 +1,316 @@
+!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<title>Nuestro Amor ❤️</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+text-align:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+color:white;
+overflow:hidden;
+}
+
+/* carga */
+
+#carga{
+position:fixed;
+width:100%;
+height:100%;
+background:#ff758c;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:40px;
+z-index:10;
+}
+
+/* login */
+
+#login{
+display:none;
+margin-top:120px;
+}
+
+input{
+padding:10px;
+font-size:18px;
+border-radius:10px;
+border:none;
+margin:10px;
+}
+
+button{
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:20px;
+background:red;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+/* pagina */
+
+#pagina{
+display:none;
+margin-top:60px;
+}
+
+#contador{
+font-size:26px;
+margin:20px;
+}
+
+/* corazon gigante */
+
+#corazonGrande{
+display:none;
+font-size:120px;
+animation:latir 1s infinite;
+}
+
+@keyframes latir{
+0%{transform:scale(1)}
+50%{transform:scale(1.2)}
+100%{transform:scale(1)}
+}
+
+/* carta */
+
+#carta{
+display:none;
+width:60%;
+margin:auto;
+background:white;
+color:black;
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+/* corazones */
+
+.corazon{
+position:fixed;
+color:red;
+font-size:20px;
+animation:subir 6s linear infinite;
+}
+
+@keyframes subir{
+0%{transform:translateY(100vh);opacity:1;}
+100%{transform:translateY(-100vh);opacity:0;}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="carga">
+❤️ Cargando amor ❤️
+</div>
+
+<div id="login">
+
+<h1>Bienvenida ❤️</h1>
+
+<input id="nombre" placeholder="Tu nombre">
+
+<br>
+
+<input type="password" id="clave" placeholder="Contraseña secreta">
+
+<br>
+
+<input type="date" id="fecha">
+
+<br><br>
+
+<button onclick="entrar()">Entrar</button>
+
+</div>
+
+
+<div id="pagina">
+
+<div id="corazonGrande">❤️</div>
+
+<h1 id="titulo"></h1>
+
+<div id="contador"></div>
+
+<button onclick="mostrarCarta()">Abrir / Cerrar carta 💌</button>
+
+<br><br>
+
+<div id="carta">
+
+<h2>💌 Carta para ti</h2>
+
+<p>
+Desde que llegaste a mi vida todo cambió para mejor.
+Cada momento contigo es especial y cada día a tu lado es un regalo.
+
+Gracias por hacerme reír, por acompañarme y por ser esa persona
+tan importante para mí.
+
+Prometo seguir contigo, cuidarte y apoyarte siempre.
+
+❤️ Te amo muchísimo ❤️
+</p>
+
+</div>
+
+<h2>¿Quieres seguir conmigo para siempre? ❤️</h2>
+
+<button onclick="si()">SI ❤️</button>
+
+<button id="no">NO</button>
+
+</div>
+
+
+<script>
+
+/* carga */
+
+setTimeout(()=>{
+document.getElementById("carga").style.display="none"
+document.getElementById("login").style.display="block"
+},3000)
+
+
+/* boton que huye */
+
+let botonNo=document.getElementById("no")
+
+botonNo.addEventListener("mouseover",()=>{
+
+botonNo.style.position="absolute"
+
+botonNo.style.left=Math.random()*80+"%"
+botonNo.style.top=Math.random()*80+"%"
+
+})
+
+
+/* login */
+
+function entrar(){
+
+let nombre=document.getElementById("nombre").value
+let fecha=document.getElementById("fecha").value
+let clave=document.getElementById("clave").value
+
+if(clave!=="polet"){
+alert("Contraseña incorrecta ❤️")
+return
+}
+
+if(nombre=="" || fecha==""){
+alert("Completa los datos")
+return
+}
+
+document.getElementById("login").style.display="none"
+document.getElementById("pagina").style.display="block"
+
+document.getElementById("corazonGrande").style.display="block"
+
+document.getElementById("titulo").innerHTML="Te amo "+nombre+" ❤️"
+
+contador(fecha)
+
+}
+
+
+/* contador */
+
+function contador(fecha){
+
+let inicio=new Date(fecha)
+
+setInterval(()=>{
+
+let ahora=new Date()
+
+let diferencia=ahora-inicio
+
+let dias=Math.floor(diferencia/(1000*60*60*24))
+let horas=Math.floor((diferencia/(1000*60*60))%24)
+let minutos=Math.floor((diferencia/(1000*60))%60)
+let segundos=Math.floor((diferencia/1000)%60)
+
+document.getElementById("contador").innerHTML=
+"💖 "+dias+" días "+horas+" horas "+minutos+" minutos "+segundos+" segundos juntos 💖"
+
+},1000)
+
+}
+
+
+/* carta */
+
+function mostrarCarta(){
+
+let carta = document.getElementById("carta")
+
+if(carta.style.display === "block"){
+carta.style.display = "none"
+}else{
+carta.style.display = "block"
+}
+
+}
+
+/* corazones */
+
+function crearCorazon(){
+
+let corazon=document.createElement("div")
+
+corazon.classList.add("corazon")
+
+corazon.innerHTML="❤️"
+
+corazon.style.left=Math.random()*100+"vw"
+
+corazon.style.fontSize=Math.random()*30+10+"px"
+
+document.body.appendChild(corazon)
+
+setTimeout(()=>{corazon.remove()},6000)
+
+}
+
+setInterval(crearCorazon,300)
+
+
+/* boton si */
+
+function si(){
+
+alert("❤️ te amo con todo mi corazon ❤️")
+
+for(let i=0;i<120;i++){
+crearCorazon()
+}
+
+}
+
+</script>
+
+</body>
+</html>
